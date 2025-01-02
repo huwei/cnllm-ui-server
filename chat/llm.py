@@ -12,7 +12,7 @@ import faiss
 import hashlib
 
 import openai
-from langchain.document_loaders import (
+from langchain_community.document_loaders import (
     TextLoader,
     PyPDFLoader,
     Docx2txtLoader,
@@ -20,11 +20,11 @@ from langchain.document_loaders import (
 )
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter  # generic
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.embeddings.openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
 from langchain.prompts.prompt import PromptTemplate
 
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import (
     AIMessage,
     HumanMessage,
@@ -37,19 +37,11 @@ from langchain.chains import (
     ConversationalRetrievalChain,
 )
 from langchain.chains.question_answering import load_qa_chain
-from langchain.chains.conversational_retrieval.prompts import CONDENSE_QUESTION_PROMPT
 from langchain.memory import ConversationBufferWindowMemory
-from langchain.callbacks import get_openai_callback
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks.base import (
     BaseCallbackHandler,
     AsyncCallbackHandler,
 )
-from langchain.callbacks.manager import (
-    CallbackManagerForChainRun,
-    AsyncCallbackManagerForChainRun,
-)
-
 logger = logging.getLogger(__name__)
 
 text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=1280, chunk_overlap=200)
